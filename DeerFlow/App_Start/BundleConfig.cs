@@ -29,6 +29,9 @@ namespace DeerFlow
             bundles.Add(new ScriptBundle("~/bundles/upload").Include(
                      "~/Scripts/upload.js"));
 
+            bundles.Add(new StyleBundle("~/Content/upload").Include(
+                     "~/Content/upload.css"));
+
             bundles.Add(new StyleBundle("~/Content/dzcss").Include(
                      "~/Scripts/dropzone/css/basic.css",
                      "~/Scripts/dropzone/css/dropzone.css"));

@@ -2,6 +2,7 @@
     ViewBag.Title = "Upload Page";
 }
 @Styles.Render("~/Content/dzcss")
+@Styles.Render("~/Content/upload")
 
 <br/>
 <div id="actions" class="row">
@@ -46,10 +47,10 @@
             <div class="col-md-2">
                 <span class="name" data-dz-name></span>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <span class="size" data-dz-size></span>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                     <div class="progress-bar progress-bar-success" style="width:0;" data-dz-uploadprogress></div>
                 </div>

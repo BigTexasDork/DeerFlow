@@ -19,11 +19,6 @@ namespace DeerFlow.Controllers
             return View();
         }
 
-        public ActionResult Upload2()
-        {
-            return View();
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
