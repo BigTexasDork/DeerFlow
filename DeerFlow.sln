@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeerFlow", "DeerFlow\DeerFlow.csproj", "{5673F4E3-1A48-428A-B774-DCF9CC3D91F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlObjects", "SqlObjects", "{6691FEC4-FAA4-4FC2-A95E-0651A07BF530}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tables", "Tables", "{3D4D2B42-FBBA-4C57-985E-5BFB402B934B}"
+	ProjectSection(SolutionItems) = preProject
+		ImageData.sql = ImageData.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5673F4E3-1A48-428A-B774-DCF9CC3D91F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5673F4E3-1A48-428A-B774-DCF9CC3D91F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5673F4E3-1A48-428A-B774-DCF9CC3D91F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5673F4E3-1A48-428A-B774-DCF9CC3D91F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3D4D2B42-FBBA-4C57-985E-5BFB402B934B} = {6691FEC4-FAA4-4FC2-A95E-0651A07BF530}
+	EndGlobalSection
+EndGlobal
