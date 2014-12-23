@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DeerFlowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Data" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImageInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContentType" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="ExifDate" Type="datetime" Nullable="false" />
+          <Property Name="ExifLattitude" Type="nchar" MaxLength="25" />
+          <Property Name="ExifLongitude" Type="nchar" MaxLength="25" />
+          <Property Name="StorageType" Type="nchar" MaxLength="10" />
+          <Property Name="ImageId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Images_Id">
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="ImageInfo" Type="Self.ImageInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ImageInfo">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DeerFlowModelStoreContainer">
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageInfo" EntityType="Self.ImageInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Images_Id" Association="Self.FK_Images_Id">
+            <End Role="Image" EntitySet="Image" />
+            <End Role="ImageInfo" EntitySet="ImageInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DeerFlowModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DeerFlowContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Image" EntityType="DeerFlowModel.Image" />
+          <EntitySet Name="ImageInfo" EntityType="DeerFlowModel.ImageInfo" />
+          <AssociationSet Name="FK_Images_Id" Association="DeerFlowModel.FK_Images_Id">
+            <End Role="Image" EntitySet="Image" />
+            <End Role="ImageInfo" EntitySet="ImageInfo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="ImageInfo" Relationship="DeerFlowModel.FK_Images_Id" FromRole="Image" ToRole="ImageInfo" />
+        </EntityType>
+        <EntityType Name="ImageInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ContentType" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="ExifDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExifLattitude" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="ExifLongitude" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="StorageType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ImageId" Type="Int32" />
+          <NavigationProperty Name="Image" Relationship="DeerFlowModel.FK_Images_Id" FromRole="ImageInfo" ToRole="Image" />
+        </EntityType>
+        <Association Name="FK_Images_Id">
+          <End Type="DeerFlowModel.Image" Role="Image" Multiplicity="0..1" />
+          <End Type="DeerFlowModel.ImageInfo" Role="ImageInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ImageInfo">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DeerFlowModelStoreContainer" CdmEntityContainer="DeerFlowContext">
+          <EntitySetMapping Name="Image">
+            <EntityTypeMapping TypeName="DeerFlowModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageInfo">
+            <EntityTypeMapping TypeName="DeerFlowModel.ImageInfo">
+              <MappingFragment StoreEntitySet="ImageInfo">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="StorageType" ColumnName="StorageType" />
+                <ScalarProperty Name="ExifLongitude" ColumnName="ExifLongitude" />
+                <ScalarProperty Name="ExifLattitude" ColumnName="ExifLattitude" />
+                <ScalarProperty Name="ExifDate" ColumnName="ExifDate" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

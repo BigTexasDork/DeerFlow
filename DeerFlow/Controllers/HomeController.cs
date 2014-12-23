@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DeerFlow.Models;
 
 namespace DeerFlow.Controllers
 {
@@ -46,20 +47,36 @@ namespace DeerFlow.Controllers
                     fName = file.FileName;
                     if (file != null && file.ContentLength > 0)
                     {
+                        var imageData = new ImageInfo()
+                        {
+                            StorageType = "Database",
+                            ContentType = file.ContentType,
+                            Name = file.FileName,
+                            ExifDate = DateTime.Now
+                        };
+                        var buffer = new byte[file.ContentLength];
+                        file.InputStream.Read(buffer, 0, file.ContentLength);
+                        var image = new Image {Data = buffer};
+                        imageData.Image = image;
 
-                        var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
+                        using (var db = new DeerFlowContext())
+                        {
+                            db.ImageInfo.Add(imageData);
+                            db.SaveChanges();
+                        }
+                        //var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
 
-                        var pathString = Path.Combine(originalDirectory.ToString(), "imagepath");
+                        //var pathString = Path.Combine(originalDirectory.ToString(), "imagepath");
 
-                        var fileName1 = Path.GetFileName(file.FileName);
+                        //var fileName1 = Path.GetFileName(file.FileName);
 
-                        var isExists = System.IO.Directory.Exists(pathString);
+                        //var isExists = System.IO.Directory.Exists(pathString);
 
-                        if (!isExists)
-                            Directory.CreateDirectory(pathString);
+                        //if (!isExists)
+                        //    Directory.CreateDirectory(pathString);
 
-                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
-                        file.SaveAs(path);
+                        //var path = string.Format("{0}\\{1}", pathString, file.FileName);
+                        //file.SaveAs(path);
 
                     }
 
