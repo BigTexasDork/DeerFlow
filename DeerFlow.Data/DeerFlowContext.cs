@@ -2,13 +2,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using DeerFlow.Entities.Models;
 
-//namespace DeerFlow.Models
-//{
-//    public class DeerFlow2Context
-//    {
-//    }
-//}
-namespace DeerFlow.Models
+namespace DeerFlow.Data
 {
     public class DeerFlowContext : DbContext
     {

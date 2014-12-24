@@ -273,6 +273,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DeerFlow.Data\DeerFlow.Data.csproj">
+      <Project>{8bd254a6-45ce-45a8-9207-129db7e41781}</Project>
+      <Name>DeerFlow.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DeerFlow.Entities\DeerFlow.Entities.csproj">
       <Project>{b765bb25-d173-40e1-8114-b67c9c9db15a}</Project>
       <Name>DeerFlow.Entities</Name>

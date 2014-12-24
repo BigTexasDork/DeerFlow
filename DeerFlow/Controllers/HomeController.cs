@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
-using DeerFlow.Models;
+using DeerFlow.Entities.Models;
 using ExifLib;
 
 namespace DeerFlow.Controllers
