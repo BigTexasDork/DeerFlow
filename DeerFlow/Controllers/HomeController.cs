@@ -13,11 +13,11 @@ namespace DeerFlow.Controllers
             return View();
         }
 
-        [Authorize]
-        public ActionResult Upload()
-        {
-            return View();
-        }
+        //[Authorize]
+        //public ActionResult Upload()
+        //{
+        //    return View();
+        //}
 
         public ActionResult About()
         {
@@ -33,71 +33,71 @@ namespace DeerFlow.Controllers
             return View();
         }
 
-        [Authorize]
-        public ActionResult SaveUploadedFile()
-        {
-            var isSavedSuccessfully = true;
-            var fName = "";
-            try
-            {
-                foreach (string fileName in Request.Files)
-                {
-                    HttpPostedFileBase file = Request.Files[fileName];
-                    if (file == null)
-                    {
-                        return Json(new { Message = "No files uploaded" });
-                    }
+        //[Authorize]
+        //public ActionResult SaveUploadedFile()
+        //{
+        //    var isSavedSuccessfully = true;
+        //    var fName = "";
+        //    try
+        //    {
+        //        foreach (string fileName in Request.Files)
+        //        {
+        //            HttpPostedFileBase file = Request.Files[fileName];
+        //            if (file == null)
+        //            {
+        //                return Json(new { Message = "No files uploaded" });
+        //            }
                     
-                    fName = file.FileName;
-                    if (file.ContentLength > 0)
-                    {
-                        using (var db = new DeerFlowContext())
-                        {
-                            var exif = new ExifReader(file.InputStream);
-                            var exifDate = new DateTime();
-                            exif.GetTagValue(ExifTags.DateTimeDigitized, out exifDate);
+        //            fName = file.FileName;
+        //            if (file.ContentLength > 0)
+        //            {
+        //                using (var db = new DeerFlowContext())
+        //                {
+        //                    var exif = new ExifReader(file.InputStream);
+        //                    var exifDate = new DateTime();
+        //                    exif.GetTagValue(ExifTags.DateTimeDigitized, out exifDate);
 
-                            var buffer = new byte[file.ContentLength];
-                            file.InputStream.Read(buffer, 0, file.ContentLength);
-                            var image = new Image { Data = buffer };
+        //                    var buffer = new byte[file.ContentLength];
+        //                    file.InputStream.Read(buffer, 0, file.ContentLength);
+        //                    var image = new Image { Data = buffer };
 
-                            db.Image.Add(image);
-                            //db.SaveChanges();
+        //                    db.Image.Add(image);
+        //                    //db.SaveChanges();
                         
-                            var imageData = new ImageInfo
-                                {
-                                    StorageType = "Database",
-                                    ContentType = file.ContentType,
-                                    Name = file.FileName,
-                                    ExifDate = exifDate,
-                                    Image = image
-                                };
+        //                    var imageData = new ImageInfo
+        //                        {
+        //                            StorageType = "Database",
+        //                            ContentType = file.ContentType,
+        //                            Name = file.FileName,
+        //                            ExifDate = exifDate,
+        //                            Image = image
+        //                        };
 
-                            db.ImageInfo.Add(imageData);
-                            db.SaveChanges();
-                        }
+        //                    db.ImageInfo.Add(imageData);
+        //                    db.SaveChanges();
+        //                }
 
-                        //var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
-                        //var pathString = Path.Combine(originalDirectory.ToString(), "imagepath");
-                        //var fileName1 = Path.GetFileName(file.FileName);
-                        //var isExists = System.IO.Directory.Exists(pathString);
-                        //if (!isExists)
-                        //    Directory.CreateDirectory(pathString);
-                        //var path = string.Format("{0}\\{1}", pathString, file.FileName);
-                        //file.SaveAs(path);
+        //                //var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
+        //                //var pathString = Path.Combine(originalDirectory.ToString(), "imagepath");
+        //                //var fileName1 = Path.GetFileName(file.FileName);
+        //                //var isExists = System.IO.Directory.Exists(pathString);
+        //                //if (!isExists)
+        //                //    Directory.CreateDirectory(pathString);
+        //                //var path = string.Format("{0}\\{1}", pathString, file.FileName);
+        //                //file.SaveAs(path);
 
-                    }
+        //            }
 
-                }
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                isSavedSuccessfully = false;
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        isSavedSuccessfully = false;
+        //    }
 
 
-            return Json(isSavedSuccessfully ? new { Message = fName } : new { Message = "Error in saving file" });
-        }
+        //    return Json(isSavedSuccessfully ? new { Message = fName } : new { Message = "Error in saving file" });
+        //}
     }
 }

@@ -1,0 +1,75 @@
+﻿@model DeerFlow.Models.ImageInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ImageInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Image.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExifDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExifDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExifLattitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExifLattitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExifLongitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExifLongitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StorageType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StorageType)
+        </dd>
+
+    </dl>
+    <img src='@Url.Action("ImageDetail", "Image", new {id = Model.ImageId})'>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
