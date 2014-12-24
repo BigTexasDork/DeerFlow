@@ -13,12 +13,12 @@ namespace DeerFlow.Controllers
     [Authorize]
     public class ImageController : Controller
     {
-        private DeerFlowContext db = new DeerFlowContext();
+        private readonly DeerFlowContext _db = new DeerFlowContext();
 
         // GET: Image
         public ActionResult Index()
         {
-            var imageInfo = db.ImageInfo.Include(i => i.Image);
+            var imageInfo = _db.ImageInfo.Include(i => i.Image);
             return View(imageInfo.ToList());
         }
 
@@ -29,7 +29,7 @@ namespace DeerFlow.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImageInfo imageInfo = db.ImageInfo.Find(id);
+            ImageInfo imageInfo = _db.ImageInfo.Find(id);
             if (imageInfo == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace DeerFlow.Controllers
         // GET: Image/Create
         public ActionResult Create()
         {
-            ViewBag.ImageId = new SelectList(db.Image, "Id", "Id");
+            ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id");
             return View();
         }
 
@@ -53,12 +53,12 @@ namespace DeerFlow.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ImageInfo.Add(imageInfo);
-                db.SaveChanges();
+                _db.ImageInfo.Add(imageInfo);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ImageId = new SelectList(db.Image, "Id", "Id", imageInfo.ImageId);
+            ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
             return View(imageInfo);
         }
 
@@ -69,12 +69,12 @@ namespace DeerFlow.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImageInfo imageInfo = db.ImageInfo.Find(id);
+            ImageInfo imageInfo = _db.ImageInfo.Find(id);
             if (imageInfo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ImageId = new SelectList(db.Image, "Id", "Id", imageInfo.ImageId);
+            ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
             return View(imageInfo);
         }
 
@@ -87,11 +87,11 @@ namespace DeerFlow.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(imageInfo).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(imageInfo).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ImageId = new SelectList(db.Image, "Id", "Id", imageInfo.ImageId);
+            ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
             return View(imageInfo);
         }
 
@@ -102,7 +102,7 @@ namespace DeerFlow.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImageInfo imageInfo = db.ImageInfo.Find(id);
+            ImageInfo imageInfo = _db.ImageInfo.Find(id);
             if (imageInfo == null)
             {
                 return HttpNotFound();
@@ -115,16 +115,16 @@ namespace DeerFlow.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ImageInfo imageInfo = db.ImageInfo.Find(id);
-            db.ImageInfo.Remove(imageInfo);
-            db.SaveChanges();
+            ImageInfo imageInfo = _db.ImageInfo.Find(id);
+            _db.ImageInfo.Remove(imageInfo);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public ActionResult ImageDetail(int id)
         {
             //var ii = db.ImageInfo.Where(i => i.Id == id).Include(b => b.Image).FirstOrDefault();
-            var ii = db.Image.Find(id);
+            var ii = _db.Image.Find(id);
             if (ii != null)
             {
                 return File(ii.Data, "image/jpeg");
@@ -172,7 +172,7 @@ namespace DeerFlow.Controllers
 
                         // get exif info
                         var exif = new ExifReader(memoryStream);
-                        var exifDate = new DateTime();
+                        DateTime exifDate;
                         exif.GetTagValue(ExifTags.DateTimeDigitized, out exifDate);
 
                         // reset the stream
@@ -181,10 +181,10 @@ namespace DeerFlow.Controllers
                         // get info for db
                         var buffer = memoryStream.ToArray();
 
-                        var valid = IsValidImage(buffer);
+                        //var valid = IsValidImage(buffer);
                         var image = new Image { Data = buffer };
 
-                        db.Image.Add(image);
+                        _db.Image.Add(image);
                         //db.SaveChanges();
 
                         var imageData = new ImageInfo
@@ -196,8 +196,8 @@ namespace DeerFlow.Controllers
                             Image = image
                         };
 
-                        db.ImageInfo.Add(imageData);
-                        db.SaveChanges();
+                        _db.ImageInfo.Add(imageData);
+                        _db.SaveChanges();
 
                         //var valid = IsValidImage(buffer);
                         //var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
@@ -238,7 +238,7 @@ namespace DeerFlow.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
