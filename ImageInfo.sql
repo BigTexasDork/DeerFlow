@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ImageInfo]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT IDENTITY(1,1) PRIMARY KEY,
 	[Name] NCHAR(50) NOT NULL, 
 	[ContentType] NCHAR(100) NOT NULL,
     [ExifDate] DATETIME NOT NULL, 

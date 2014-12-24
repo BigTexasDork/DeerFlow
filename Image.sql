@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Image]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT IDENTITY(1,1) PRIMARY KEY, 
     [Data] IMAGE NOT NULL
 )

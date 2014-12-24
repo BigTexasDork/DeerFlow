@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DeerFlow.Models;
@@ -16,6 +13,7 @@ namespace DeerFlow.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Upload()
         {
             return View();
@@ -35,6 +33,7 @@ namespace DeerFlow.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult SaveUploadedFile()
         {
             var isSavedSuccessfully = true;
@@ -44,9 +43,13 @@ namespace DeerFlow.Controllers
                 foreach (string fileName in Request.Files)
                 {
                     HttpPostedFileBase file = Request.Files[fileName];
-                    //Save file content goes here
+                    if (file == null)
+                    {
+                        return Json(new { Message = "No files uploaded" });
+                    }
+                    
                     fName = file.FileName;
-                    if (file != null && file.ContentLength > 0)
+                    if (file.ContentLength > 0)
                     {
                         using (var db = new DeerFlowContext())
                         {

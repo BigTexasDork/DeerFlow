@@ -176,32 +176,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Models\DeerFlowModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DeerFlowModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeerFlowModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DeerFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeerFlowModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DeerFlowModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\DeerFlowContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Image.cs">
-      <DependentUpon>DeerFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ImageInfo.cs">
-      <DependentUpon>DeerFlowModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\ImageInfo.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -221,23 +203,6 @@
     <Content Include="Scripts\dropzone\css\dropzone.css" />
     <Content Include="Scripts\dropzone\css\stylus\dropzone.styl" />
     <Content Include="Scripts\dropzone\css\stylus\basic.styl" />
-    <EntityDeploy Include="Models\DeerFlowModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DeerFlowModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DeerFlowModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DeerFlowModel.edmx</DependentUpon>
-      <LastGenOutput>DeerFlowModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DeerFlowModel.edmx.diagram">
-      <DependentUpon>DeerFlowModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DeerFlowModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DeerFlowModel.edmx</DependentUpon>
-      <LastGenOutput>DeerFlowModel.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
