@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DeerFlow.Models
+namespace DeerFlow.Entities.Models
 {
     public class ImageInfo
     {
