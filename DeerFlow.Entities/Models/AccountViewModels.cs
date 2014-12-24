@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DeerFlow.Models
+namespace DeerFlow.Entities.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
