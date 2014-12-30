@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using DeerFlow.Entities.Models;
 using DeerFlow.Data;
+using DeerFlow.Entities;
 using DeerFlow.Repository;
 using ExifLib;
 using PagedList;
@@ -59,6 +60,7 @@ namespace DeerFlow.Controllers
             return View(imageInfo);
         }
 
+        #region Unneeded (yet) actions from default scaffolding
         // GET: Image/Create
         //public ActionResult Create()
         //{
@@ -141,7 +143,8 @@ namespace DeerFlow.Controllers
         //    _db.ImageInfo.Remove(imageInfo);
         //    _db.SaveChanges();
         //    return RedirectToAction("Index");
-        //}
+        //} 
+        #endregion
 
         public ActionResult ImageDetail(int id)
         {
@@ -207,7 +210,7 @@ namespace DeerFlow.Controllers
                         var buffer = memoryStream.ToArray();
 
                         //var valid = IsValidImage(buffer);
-                        var image = new Image { Data = buffer };
+                        var image = new Image { Data = buffer, State = ObjectState.Added};
 
                         //_db.Image.Add(image);
 
@@ -217,6 +220,8 @@ namespace DeerFlow.Controllers
                             ContentType = file.ContentType,
                             Name = file.FileName,
                             ExifDate = exifDate,
+                            State = ObjectState.Added,
+                            InsertDate = DateTime.Now,
                             Image = image
                         };
 

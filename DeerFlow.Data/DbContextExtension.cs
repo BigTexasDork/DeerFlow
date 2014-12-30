@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DeerFlow.Entities;
 
 namespace DeerFlow.Data
 {
@@ -32,7 +33,7 @@ namespace DeerFlow.Data
             switch (state)
             {
                 case ObjectState.Added:
-                    return EntityState.Modified;
+                    return EntityState.Added;
                 case ObjectState.Modified:
                     return EntityState.Modified;
                 case ObjectState.Deleted:

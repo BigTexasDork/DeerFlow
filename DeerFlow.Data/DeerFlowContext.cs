@@ -1,9 +1,8 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using DeerFlow.Data;
 using DeerFlow.Entities.Models;
 
-namespace DeerFlow.Entities
+namespace DeerFlow.Data
 {
     public class DeerFlowContext : DbContext, IDbContext
     {

@@ -43,10 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContextExtension.cs" />
+    <Compile Include="DeerFlowContext.cs" />
     <Compile Include="IDbContext.cs" />
-    <Compile Include="IObjectState.cs" />
-    <Compile Include="ObjectState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeerFlow.Entities\DeerFlow.Entities.csproj">
+      <Project>{b765bb25-d173-40e1-8114-b67c9c9db15a}</Project>
+      <Name>DeerFlow.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
