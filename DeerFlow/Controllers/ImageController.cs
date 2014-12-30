@@ -16,7 +16,7 @@ namespace DeerFlow.Controllers
     [Authorize]
     public class ImageController : Controller
     {
-        private readonly DeerFlowContext _db = new DeerFlowContext();
+        //private readonly DeerFlowContext _db = new DeerFlowContext();
 
         // GET: Image
         public ActionResult Index(int? page)
@@ -60,88 +60,88 @@ namespace DeerFlow.Controllers
         }
 
         // GET: Image/Create
-        public ActionResult Create()
-        {
-            ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id");
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id");
+        //    return View();
+        //}
 
         // POST: Image/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ContentType,ExifDate,ExifLattitude,ExifLongitude,StorageType,ImageId")] ImageInfo imageInfo)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.ImageInfo.Add(imageInfo);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,Name,ContentType,ExifDate,ExifLattitude,ExifLongitude,StorageType,ImageId")] ImageInfo imageInfo)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _db.ImageInfo.Add(imageInfo);
+        //        _db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
-            return View(imageInfo);
-        }
+        //    ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
+        //    return View(imageInfo);
+        //}
 
         // GET: Image/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ImageInfo imageInfo = _db.ImageInfo.Find(id);
-            if (imageInfo == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
-            return View(imageInfo);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ImageInfo imageInfo = _db.ImageInfo.Find(id);
+        //    if (imageInfo == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
+        //    return View(imageInfo);
+        //}
 
         // POST: Image/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ContentType,ExifDate,ExifLattitude,ExifLongitude,StorageType,ImageId")] ImageInfo imageInfo)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Entry(imageInfo).State = EntityState.Modified;
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
-            return View(imageInfo);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Name,ContentType,ExifDate,ExifLattitude,ExifLongitude,StorageType,ImageId")] ImageInfo imageInfo)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _db.Entry(imageInfo).State = EntityState.Modified;
+        //        _db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.ImageId = new SelectList(_db.Image, "Id", "Id", imageInfo.ImageId);
+        //    return View(imageInfo);
+        //}
 
         // GET: Image/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ImageInfo imageInfo = _db.ImageInfo.Find(id);
-            if (imageInfo == null)
-            {
-                return HttpNotFound();
-            }
-            return View(imageInfo);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ImageInfo imageInfo = _db.ImageInfo.Find(id);
+        //    if (imageInfo == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(imageInfo);
+        //}
 
         // POST: Image/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ImageInfo imageInfo = _db.ImageInfo.Find(id);
-            _db.ImageInfo.Remove(imageInfo);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    ImageInfo imageInfo = _db.ImageInfo.Find(id);
+        //    _db.ImageInfo.Remove(imageInfo);
+        //    _db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         public ActionResult ImageDetail(int id)
         {
@@ -209,8 +209,7 @@ namespace DeerFlow.Controllers
                         //var valid = IsValidImage(buffer);
                         var image = new Image { Data = buffer };
 
-                        _db.Image.Add(image);
-                        //db.SaveChanges();
+                        //_db.Image.Add(image);
 
                         var imageData = new ImageInfo
                         {
@@ -221,8 +220,12 @@ namespace DeerFlow.Controllers
                             Image = image
                         };
 
-                        _db.ImageInfo.Add(imageData);
-                        _db.SaveChanges();
+                        var uow = new UnitOfWork();
+                        uow.Repository<ImageInfo>().InsertGraph(imageData);
+                        uow.Save();
+
+                        //_db.ImageInfo.Add(imageData);
+                        //_db.SaveChanges();
 
                         //var valid = IsValidImage(buffer);
                         //var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
@@ -259,13 +262,14 @@ namespace DeerFlow.Controllers
             }
             return true;
         }
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        _db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
