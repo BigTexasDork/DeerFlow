@@ -1,8 +1,9 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using DeerFlow.Data;
 using DeerFlow.Entities.Models;
 
-namespace DeerFlow.Data
+namespace DeerFlow.Entities
 {
     public class DeerFlowContext : DbContext, IDbContext
     {
@@ -30,10 +31,14 @@ namespace DeerFlow.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<ImageInfo>().ToTable("ImageInfo");
+            modelBuilder.Entity<Image>().ToTable("Image");
+
             Database.SetInitializer<DeerFlowContext>(null);
         }
 
-        public virtual DbSet<Image> Image { get; set; }
-        public virtual DbSet<ImageInfo> ImageInfo { get; set; }
+        //public virtual DbSet<Image> Image { get; set; }
+        //public virtual DbSet<ImageInfo> ImageInfo { get; set; }
     }
 }
