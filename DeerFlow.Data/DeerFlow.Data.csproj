@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DeerFlow.Entities\DeerFlow.Entities.csproj">
-      <Project>{B765BB25-D173-40E1-8114-B67C9C9DB15A}</Project>
+      <Project>{b765bb25-d173-40e1-8114-b67c9c9db15a}</Project>
       <Name>DeerFlow.Entities</Name>
     </ProjectReference>
   </ItemGroup>

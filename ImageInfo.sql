@@ -1,13 +1,26 @@
-﻿CREATE TABLE [dbo].[ImageInfo]
-(
-	[Id] INT IDENTITY(1,1) PRIMARY KEY,
-	[Name] NCHAR(50) NOT NULL, 
-	[ContentType] NCHAR(100) NOT NULL,
-    [ExifDate] DATETIME NOT NULL, 
-    [ExifLattitude] NCHAR(25) NULL, 
-    [ExifLongitude] NCHAR(25) NULL, 
-    [StorageType] NCHAR(10) NULL, 
-    [ImageId] INT NULL,
-	CONSTRAINT [FK_Images_Id] FOREIGN KEY ([ImageId])
-		REFERENCES [Image] ([Id])
-)
+﻿IF NOT EXISTS (SELECT TOP 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ImageInfo')
+
+BEGIN
+	CREATE TABLE [dbo].[ImageInfo]
+	(
+		[Id] INT IDENTITY(1,1) PRIMARY KEY,
+		[Name] NCHAR(50) NOT NULL, 
+		[ContentType] NCHAR(100) NOT NULL,
+		[ExifDate] DATETIME NOT NULL, 
+		[ExifLattitude] NCHAR(25) NULL, 
+		[ExifLongitude] NCHAR(25) NULL, 
+		[StorageType] NCHAR(10) NULL, 
+		[ImageId] INT NULL,
+		CONSTRAINT [FK_Images_Id] FOREIGN KEY ([ImageId])
+			REFERENCES [Image] ([Id])
+	)
+END
+
+IF NOT EXISTS(
+SELECT TOP 1 *
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE [TABLE_NAME] = 'ImageInfo'
+AND [COLUMN_NAME] = 'InsertDate')
+BEGIN
+	ALTER TABLE [ImageInfo] ADD [InsertDate] DATETIME NOT NULL DEFAULT getDate()
+END

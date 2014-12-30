@@ -26,6 +26,9 @@
             ContentType
         </th>
         <th>
+            InsertDate
+        </th>
+        <th>
             ExifDate
         </th>
         <th>
@@ -46,6 +49,7 @@
             <td>@image.Image.Id</td>
             <td>@image.Name</td>
             <td>@image.ContentType</td>
+            <td>@String.Format("{0:d}", image.InsertDate)</td>
             <td>@image.ExifDate</td>
             <td>@image.ExifLattitude</td>
             <td>@image.ExifLongitude</td>
@@ -54,7 +58,7 @@
         </tr>
     }
     <tr>
-        <td colspan="8">
+        <td colspan="9">
             @Html.PagedListPager((IPagedList)ViewBag.Images, page => Url.Action("Index", new { page }))
         </td>
     </tr>

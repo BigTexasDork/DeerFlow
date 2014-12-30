@@ -14,6 +14,7 @@ namespace DeerFlow.Entities.Models
         public string ExifLongitude { get; set; }
         public string StorageType { get; set; }
         public int? ImageId { get; set; }
+        public DateTime InsertDate { get; set; }
 
         public Image Image { get; set; }
     }
