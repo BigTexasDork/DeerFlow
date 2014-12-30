@@ -1,70 +1,62 @@
-﻿@model IEnumerable<DeerFlow.Entities.Models.ImageInfo>
-
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Images";
 }
 
-<h2>Index</h2>
+@using PagedList.Mvc;
+@using PagedList;
+
+<h2>Images</h2>
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css"/>
 
 <p>
     @Html.ActionLink("Upload Image(s)", "Upload")
 </p>
-<table class="table">
-    <tr>
+
+<table style="width: 100%; padding: 10px">
+    <tr style="background-color: lightgray; padding: 10px;">
         <th>
-            @Html.DisplayNameFor(model => model.Image.Id)
+            Id
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContentType)
+            ContentType
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ExifDate)
+            ExifDate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ExifLattitude)
+            ExifLattitude
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ExifLongitude)
+            ExifLongitude
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StorageType)
+            StorageType
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var image in ViewBag.Images)
+    {
+        <tr>
+            <td>@image.Image.Id</td>
+            <td>@image.Name</td>
+            <td>@image.ContentType</td>
+            <td>@image.ExifDate</td>
+            <td>@image.ExifLattitude</td>
+            <td>@image.ExifLongitude</td>
+            <td>@image.StorageType</td>
+            <td>Edit | Details | Delete</td>
+        </tr>
+    }
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExifDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExifLattitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExifLongitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StorageType)
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-            Edit | @Html.ActionLink("Details", "Details", new { id = item.Id }) | Delete
+        <td colspan="8">
+            @Html.PagedListPager((IPagedList)ViewBag.Images, page => Url.Action("Index", new { page }))
         </td>
     </tr>
-}
-
 </table>
+

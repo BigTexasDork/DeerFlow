@@ -4,11 +4,27 @@ using DeerFlow.Entities.Models;
 
 namespace DeerFlow.Data
 {
-    public class DeerFlowContext : DbContext
+    public class DeerFlowContext : DbContext, IDbContext
     {
+        static DeerFlowContext()
+        {
+            Database.SetInitializer<DeerFlowContext>(null);
+        }
+
         public DeerFlowContext()
             : base("name=DeerFlowContext")
         {
+        }
+
+        public new IDbSet<T> Set<T>() where T : class
+        {
+            return base.Set<T>();
+        }
+
+        public override int SaveChanges()
+        {
+            this.ApplyStateChanges();
+            return base.SaveChanges();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

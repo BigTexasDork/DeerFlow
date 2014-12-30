@@ -7,7 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using DeerFlow.Entities.Models;
 using DeerFlow.Data;
+using DeerFlow.Repository;
 using ExifLib;
+using PagedList;
 
 namespace DeerFlow.Controllers
 {
@@ -17,10 +19,25 @@ namespace DeerFlow.Controllers
         private readonly DeerFlowContext _db = new DeerFlowContext();
 
         // GET: Image
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var imageInfo = _db.ImageInfo.Include(i => i.Image);
-            return View(imageInfo.ToList());
+            var pagenumber = page ?? 1;
+            const int pagesize = 5;
+
+            var uow = new UnitOfWork();
+
+            int totalImageCount;
+
+            var images = uow.Repository<ImageInfo>()
+                .Query()
+                .Include(ii => ii.Image)
+                .OrderBy(i => i.OrderBy(c => c.ImageId)) // have to order so Skip functionality works in the paged list - jf
+                .GetPage(pagenumber, pagesize, out totalImageCount);
+
+            ViewBag.Images = new StaticPagedList<ImageInfo>(images, pagenumber, pagesize, totalImageCount);
+
+            //var imageInfo = _db.ImageInfo.Include(i => i.Image);
+            return View();
         }
 
         // GET: Image/Details/5
@@ -30,7 +47,11 @@ namespace DeerFlow.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImageInfo imageInfo = _db.ImageInfo.Find(id);
+
+            var uow = new UnitOfWork();
+            var imageInfo =
+            uow.Repository<ImageInfo>().FindById(id);
+
             if (imageInfo == null)
             {
                 return HttpNotFound();
@@ -125,7 +146,10 @@ namespace DeerFlow.Controllers
         public ActionResult ImageDetail(int id)
         {
             //var ii = db.ImageInfo.Where(i => i.Id == id).Include(b => b.Image).FirstOrDefault();
-            var ii = _db.Image.Find(id);
+            var uow = new UnitOfWork();
+
+            //var ii = _db.Image.Find(id);
+            var ii = uow.Repository<Image>().FindById(id);
             if (ii != null)
             {
                 return File(ii.Data, "image/jpeg");
